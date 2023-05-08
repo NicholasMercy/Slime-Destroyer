@@ -59,7 +59,18 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("-1 health");
+            Destroy(collision.gameObject);
+            //Debug.Log("-1 health");
+        }
+        else if(collision.gameObject.CompareTag("Powerup"))
+        {            
+            Destroy(collision.gameObject);
+            //Debug.Log("Powerup");
+        }
+        else if (collision.gameObject.CompareTag("Gunpickup"))
+        {           
+            Destroy(collision.gameObject);
+            //Debug.Log("Gunswitch");
         }
     }
 
