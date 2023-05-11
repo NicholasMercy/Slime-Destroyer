@@ -15,10 +15,14 @@ public class SpawnManager : MonoBehaviour
     int zRange = 23;
     int xRange = 23;
 
+    float timeSpawn = 0;
+    float timeRate = 5;
+
     void Start()
     {
         SpawnEnemy();
         SpawnPowerUp();
+        InvokeRepeating("SpawnPowerUp", timeSpawn, timeRate);
         Debug.Log("WAVE " + (waveCount-1));
     }
 
@@ -29,8 +33,10 @@ public class SpawnManager : MonoBehaviour
         if(enemyCount == 0)
         {
             SpawnEnemy();
+            SpawnPowerUp();
             Debug.Log("WAVE "+ (waveCount -1));
         }
+        
     }
     
     void SpawnEnemy()
@@ -86,7 +92,7 @@ public class SpawnManager : MonoBehaviour
         int randomXPos = Random.Range(-xRange, xRange);
 
         int randomPowerUp = Random.Range(0, powerUps.Length);
-        Vector3 randomPos = new Vector3(randomXPos, 0, randomzPos);
+        Vector3 randomPos = new Vector3(randomXPos, 0.5f, randomzPos);
 
         Instantiate(powerUps[randomPowerUp], randomPos, Quaternion.identity);
         

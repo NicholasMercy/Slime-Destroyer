@@ -8,17 +8,19 @@ public class PlayerController : MonoBehaviour
     private float zBound = 24f;
     private float xBound = 24f;
     private bool gotHit;
+    private bool isMoving;
 
     Vector3 mousePos;
     public Transform player;
     Vector3 objectPos;
     float angle;
     private Animator animator;
-
     private Rigidbody playerRb;
+
     // Start is called before the first frame update
     void Start()
     {
+        isMoving = false;   
         gotHit = false;
         playerRb = GetComponent<Rigidbody>();
         player = GetComponent<Transform>();       
@@ -26,8 +28,8 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void FixedUpdate()
+    {           
         if (!gotHit)
         {
             animator.Play("WalkFWD");
@@ -40,12 +42,13 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
+        
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
         Vector3 moveDir = new Vector3(horizontalInput, 0, verticalInput).normalized;
         transform.position += moveDir * currentSpeed * Time.deltaTime;
-        
+     
         
 
     }
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+           // Destroy(other.gameObject);
             StartCoroutine(PlayGetHit());         
             //Debug.Log("-1 health");
         }
@@ -108,5 +111,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         gotHit = false; 
     }
+ 
 
 }
