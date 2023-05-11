@@ -8,21 +8,28 @@ public class PlayerController : MonoBehaviour
     private float zBound = 24f;
     private float xBound = 24f;
 
+    Vector3 mousePos;
+    public Transform player;
+    Vector3 objectPos;
+    float angle;
+
     private Rigidbody playerRb;
     // Start is called before the first frame update
     void Start()
     {
-
+        
         playerRb = GetComponent<Rigidbody>();
+        player = GetComponent<Transform>();       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        MouseLook();
         ConstraintPlayerMove();
         MovePlayer();
+        
 
     }
 
@@ -33,6 +40,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDir = new Vector3(horizontalInput, 0, verticalInput).normalized;
         transform.position += moveDir * currentSpeed * Time.deltaTime;
+       
+       
     }
     void ConstraintPlayerMove()
     {
@@ -72,6 +81,17 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             //Debug.Log("Gunswitch");
         }
+    }
+
+    void MouseLook()
+    {
+        mousePos = Input.mousePosition;
+        mousePos.z = 5.23f; 
+        objectPos = Camera.main.WorldToScreenPoint(player.position);
+        mousePos.x = mousePos.x - objectPos.x;
+        mousePos.y = mousePos.y - objectPos.y;
+        angle = Mathf.Atan2(mousePos.y, mousePos.x)*Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, -angle+90, 0));
     }
 
 }
