@@ -22,7 +22,7 @@ public class PowerUp : MonoBehaviour
     }
     IEnumerator DestroyAfterTime()
     {
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 }

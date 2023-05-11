@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2560893135629384079}
   m_Layer: 0
   m_Name: AK48
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,16 +26,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802972858093556525}
-  m_LocalRotation: {x: -0.023561392, y: -0.70671415, z: -0.023561392, w: 0.70671415}
-  m_LocalPosition: {x: -0.027038, y: 0.045639, z: 0.59}
-  m_LocalScale: {x: 3.6991138, y: 3.6991138, z: 3.6991138}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -0.18382, y: -0.021619, z: -0.18382}
+  m_LocalScale: {x: 11.099365, y: 4.647197, z: 4.647197}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 172809399290397709}
   - {fileID: 8084172199720079462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -3.819, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!33 &6802972858096794797
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,10 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aab47564da431f408a22b8289645f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  speed: 80
-  dmg: 40
+  type: 1
+  speed: 60
+  dmg: 30
   firerate: 1
+  scale: 3
   bullet: {fileID: 5749749241619969709, guid: 63e8fe7a515b91848b463037a6c12274, type: 3}
   BulletSpawn: {fileID: 8084172199720079462}
   gunExplosion: {fileID: 172809399308717387}

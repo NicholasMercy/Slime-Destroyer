@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float intialSpeed;
     public float currentSpeed;
+    public float doubleSpeed;
     private float zBound = 24f;
     private float xBound = 24f;
     private bool gotHit;
     private bool isMoving;
+    public float timeForPowerUp;
 
     Vector3 mousePos;
     public Transform player;
@@ -17,9 +20,18 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Rigidbody playerRb;
 
+    public ParticleSystem explosionChange;
+
+    public PowerupType powerupType;
+
+    public GameObject[] Guns;
+    public Transform spawnPosGun;
+    public bool hasGun;
     // Start is called before the first frame update
     void Start()
     {
+        ChangeGuns();
+        currentSpeed = intialSpeed;
         isMoving = false;   
         gotHit = false;
         playerRb = GetComponent<Rigidbody>();
@@ -84,14 +96,19 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Powerup"))
         {
-            Destroy(other.gameObject);
-            //Debug.Log("Powerup");
+            if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.speedup)
+            {
+                StartCoroutine(SpeedUp());
+                Destroy(other.gameObject);
+
+            }
+            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.gunpick)
+            {
+                ChangeGuns();
+                Destroy(other.gameObject);
+            }                        
         }
-        else if (other.gameObject.CompareTag("Gunpickup"))
-        {
-            Destroy(other.gameObject);
-            //Debug.Log("Gunswitch");
-        }
+       
     }
 
     void MouseLook()
@@ -112,5 +129,23 @@ public class PlayerController : MonoBehaviour
         gotHit = false; 
     }
  
+    IEnumerator SpeedUp()
+    {
+        currentSpeed = doubleSpeed;
+        yield return new WaitForSeconds(timeForPowerUp);
+        currentSpeed = intialSpeed;
+    }
+    void ChangeGuns()
+    {
+        for (int i = 0;i  < Guns.Length;i++)
+        {
+            Guns[i].gameObject.SetActive(false);
+            Guns[i].gameObject.GetComponent<Guns>().isShooting = false;
+        }
+        int random = Random.Range(0, Guns.Length);
+        explosionChange.Play();
+        Guns[random].SetActive(true);
 
+        
+    }
 }

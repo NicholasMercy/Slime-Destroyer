@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2560893135629384079}
   m_Layer: 0
   m_Name: AK47
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,8 +57,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802972858093556525}
-  m_LocalRotation: {x: -0.023560785, y: -0.70671415, z: -0.023560788, w: 0.70671415}
-  m_LocalPosition: {x: -0.22854, y: 0.047031, z: 0.59}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.9753277, y: 2.9753277, z: 2.9753277}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -66,7 +66,7 @@ Transform:
   - {fileID: 8447643730195884682}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -3.819, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6802972858096794797
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -130,112 +130,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  speed: 75
-  dmg: 6
-  firerate: 0.5
+  speed: 70
+  dmg: 1
+  firerate: 0.1
+  scale: 1
+  isShooting: 0
   bullet: {fileID: 5749749241619969709, guid: 63e8fe7a515b91848b463037a6c12274, type: 3}
   BulletSpawn: {fileID: 8447643730195884682}
   gunExplosion: {fileID: 172809399308717387}
---- !u!1001 &172809399290250201
+--- !u!1001 &5645173116280220805
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 6802972858093832191}
     m_Modifications:
-    - target: {fileID: 120410, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: m_Name
-      value: 'FX_Fireworks_Blue_Small '
-      objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.096814975
-      objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.09681496
-      objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.09681496
-      objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.124927394
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.6908635
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+    - target: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: looping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: lengthInSec
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.001
+    - target: {fileID: 5490554462847973638, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
+      propertyPath: m_Name
+      value: 'FX_Fireworks_Blue_Small '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
 --- !u!4 &172809399290397709 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 444372, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-  m_PrefabInstance: {fileID: 172809399290250201}
+  m_CorrespondingSourceObject: {fileID: 5490554462847772808, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
+  m_PrefabInstance: {fileID: 5645173116280220805}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &172809399308717387 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19811986, guid: 6636b3078b0905e489f698a11b7a6b6b, type: 3}
-  m_PrefabInstance: {fileID: 172809399290250201}
+  m_CorrespondingSourceObject: {fileID: 5490554462828405198, guid: d64315e936082e745a8b3c4b51abdb09, type: 3}
+  m_PrefabInstance: {fileID: 5645173116280220805}
   m_PrefabAsset: {fileID: 0}

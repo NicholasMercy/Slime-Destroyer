@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2560893135629384079}
   m_Layer: 0
   m_Name: AK49
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,16 +57,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802972858093556525}
-  m_LocalRotation: {x: -0.023561392, y: -0.70671415, z: -0.023561392, w: 0.70671415}
-  m_LocalPosition: {x: -0.16192347, y: 0.071368314, z: 0.59}
-  m_LocalScale: {x: 3.2017214, y: 3.2017214, z: 3.2017214}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -0.0037956, y: 0, z: -0.0037957}
+  m_LocalScale: {x: 2.0242243, y: 3.2017214, z: 3.2212982}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 172809399290397709}
   - {fileID: 7361545132972761007}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -3.819, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!33 &6802972858096794797
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -129,10 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aab47564da431f408a22b8289645f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 2
   speed: 90
-  dmg: 7
-  firerate: 0.4
+  dmg: 2
+  firerate: 0.3
+  scale: 1.5
+  isShooting: 0
   bullet: {fileID: 5749749241619969709, guid: 63e8fe7a515b91848b463037a6c12274, type: 3}
   BulletSpawn: {fileID: 7361545132972761007}
   gunExplosion: {fileID: 172809399308717387}

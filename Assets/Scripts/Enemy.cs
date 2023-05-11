@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,12 +13,15 @@ public class Enemy : MonoBehaviour
     private float speed = 8f;
     private float halfSpeed = 4f;
     private Animator animator;
-    public ParticleSystem death;
+    public bool death;
+    public ParticleSystem deathParticle;
+
 
     public float hp;
     void Start()
     {
-
+        //deathParticle.Stop();
+        death = false;
         player = GameObject.Find("Player");       
         rb = GetComponent<Rigidbody>();
         speed = Random.Range(3, speed);
@@ -32,9 +36,12 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         
-       
-        MoveToPlayer();
-        DestroyEnemy();
+       if(!death)
+        {
+            MoveToPlayer();
+            DestroyEnemy();
+        }
+        
 
     }
 
@@ -68,9 +75,16 @@ public class Enemy : MonoBehaviour
     {
         if(hp <= 0)
         {
-            death.Play();
-            Destroy(gameObject);
+            StartCoroutine(OnDeath());
         }
+    }
+    IEnumerator OnDeath()
+    {
+        death = true;       
+        animator.Play("Die");
+        deathParticle.Play();
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);    
     }
    
 }

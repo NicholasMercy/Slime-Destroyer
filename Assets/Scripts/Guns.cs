@@ -12,14 +12,19 @@ public class Guns : MonoBehaviour
     public float speed;
     public float dmg;
     public float firerate;
-    bool isShooting;
+    public float scale;
+    Vector3 scaleChanger;
+    public bool isShooting;
     public GameObject bullet;
     public Transform BulletSpawn;
-    public ParticleSystem gunExplosion;
+    public ParticleSystem gunExplosion;  
     BulletBehaviour bulletBehaviour;
+    
     // Start is called before the first frame update
     void Start()
     {
+        scaleChanger = new Vector3 (scale, scale, scale);
+        //transform.Rotate(0, 30f, 0);        
         bulletBehaviour = bullet.GetComponent<BulletBehaviour>();       
     }
 
@@ -36,7 +41,7 @@ public class Guns : MonoBehaviour
         isShooting = true;
         gunExplosion.Play();
         Instantiate(bullet, BulletSpawn.position, transform.rotation);
-        bulletBehaviour.SetVariables(speed, dmg);
+        bulletBehaviour.SetVariables(speed, dmg, scaleChanger);
         yield return new WaitForSeconds(firerate);              
         isShooting=false;
     }

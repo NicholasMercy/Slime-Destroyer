@@ -7,16 +7,19 @@ public class BulletBehaviour : MonoBehaviour
     // Start is called before the first frame update
     public float speed;
     public float dmg;
+    public Vector3 scaleChange;
+    
     void Start()
     {
         StartCoroutine(DestroyAfterTime()); 
-        Debug.Log(speed + " " + dmg);
+        //Debug.Log(speed + " " + dmg);
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.forward *speed* Time.deltaTime);  
+        transform.localScale = scaleChange;
     }
 
 
@@ -26,18 +29,20 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetVariables(float Speed, float Dmg)
+    public void SetVariables(float Speed, float Dmg, Vector3 ScaleChange)
     {
-        Debug.Log("worrking");
+        scaleChange = ScaleChange;
         speed = Speed;
         dmg = Dmg;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy")) 
+        if (other.CompareTag("Enemy") && other.gameObject.GetComponent<Enemy>().death == false) 
         {
+            Debug.Log("hit");
             Enemy tempEnemy = other.GetComponent<Enemy>();
             tempEnemy.hp = tempEnemy.hp - dmg;
+            
             Destroy(gameObject);    
         
         }

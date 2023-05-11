@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     {
 
        // Debug.Log(EnemySpawnNo);       
-        EnemySpawnNo = waveCount + 2;
+        EnemySpawnNo = waveCount + 6;
         for (int i = 0; i < EnemySpawnNo; i++)
         {
             //side choice
