@@ -549,7 +549,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.65
+  orthographic size: 9.11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -896,6 +896,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.6941879
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7056818
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Size.z
+      value: 1.8662977
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Center.x
+      value: 0.07712886
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Center.y
+      value: 0.3528409
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445436485122753896, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
+      propertyPath: m_Center.z
+      value: 0.025835752
+      objectReference: {fileID: 0}
     - target: {fileID: 2445436485122753899, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -906,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2445436485122753899, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 2445436485122753899, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -944,5 +972,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6645777276076513478, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1f7e93f0f35402f46bd7bd4883f4b3a6, type: 3}

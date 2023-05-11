@@ -7,30 +7,35 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     private float zBound = 24f;
     private float xBound = 24f;
+    private bool gotHit;
 
     Vector3 mousePos;
     public Transform player;
     Vector3 objectPos;
     float angle;
+    private Animator animator;
 
     private Rigidbody playerRb;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gotHit = false;
         playerRb = GetComponent<Rigidbody>();
         player = GetComponent<Transform>();       
-
+        animator = gameObject.GetComponentInChildren<Animator>();   
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!gotHit)
+        {
+            animator.Play("WalkFWD");
+        }
         MouseLook();
         ConstraintPlayerMove();
         MovePlayer();
-        
-
+       
     }
 
     void MovePlayer()
@@ -40,8 +45,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDir = new Vector3(horizontalInput, 0, verticalInput).normalized;
         transform.position += moveDir * currentSpeed * Time.deltaTime;
-       
-       
+        
+        
+
     }
     void ConstraintPlayerMove()
     {
@@ -64,21 +70,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
+            StartCoroutine(PlayGetHit());         
             //Debug.Log("-1 health");
         }
-        else if(collision.gameObject.CompareTag("Powerup"))
-        {            
-            Destroy(collision.gameObject);
+        else if (other.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(other.gameObject);
             //Debug.Log("Powerup");
         }
-        else if (collision.gameObject.CompareTag("Gunpickup"))
-        {           
-            Destroy(collision.gameObject);
+        else if (other.gameObject.CompareTag("Gunpickup"))
+        {
+            Destroy(other.gameObject);
             //Debug.Log("Gunswitch");
         }
     }
@@ -92,6 +100,13 @@ public class PlayerController : MonoBehaviour
         mousePos.y = mousePos.y - objectPos.y;
         angle = Mathf.Atan2(mousePos.y, mousePos.x)*Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, -angle+90, 0));
+    }
+    IEnumerator PlayGetHit() 
+    {
+        gotHit = true;
+        animator.Play("GetHit");
+        yield return new WaitForSeconds(0.5f);
+        gotHit = false; 
     }
 
 }
