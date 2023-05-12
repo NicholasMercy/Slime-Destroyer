@@ -18,23 +18,30 @@ public class SpawnManager : MonoBehaviour
     float timeSpawn = 0;
     float timeRate = 5;
 
+    PlayerController player;
+    UiManager uiManager;
     void Start()
     {
         SpawnEnemy();
         SpawnPowerUp();
         InvokeRepeating("SpawnPowerUp", timeSpawn, timeRate);
-        Debug.Log("WAVE " + (waveCount-1));
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
+        uiManager.UpdateWaveCounter(waveCount - 1);
+        //Debug.Log("WAVE " + (waveCount-1));
     }
 
     // Update is called once per frame
     void Update()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
-        if(enemyCount == 0)
+        uiManager.UpdateEnemiesCounter(enemyCount);
+        if(enemyCount == 0 && !player.gameOver)
         {
             SpawnEnemy();
             SpawnPowerUp();
             Debug.Log("WAVE "+ (waveCount -1));
+            uiManager.UpdateWaveCounter(waveCount-1);
         }
         
     }

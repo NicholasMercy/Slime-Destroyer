@@ -41,7 +41,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             Debug.Log("hit");
             Enemy tempEnemy = other.GetComponent<Enemy>();
-            tempEnemy.hp = tempEnemy.hp - dmg;
+            tempEnemy.TakeDamage(dmg);
             
             Destroy(gameObject);    
         

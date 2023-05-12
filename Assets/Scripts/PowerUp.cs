@@ -8,11 +8,17 @@ public enum PowerupType
 }
 public class PowerUp : MonoBehaviour
 {
-    public PowerupType type;    
+    public PowerupType type;
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(DestroyAfterTime());
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        if(!player.gameOver)
+        {
+            StartCoroutine(DestroyAfterTime());
+
+        }     
     }
 
     // Update is called once per frame

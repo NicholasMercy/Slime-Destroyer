@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
     public float doubleSpeed;
     private float zBound = 24f;
     private float xBound = 24f;
-    private bool gotHit;
-    private bool isMoving;
+    private bool gotHit;   
     public float timeForPowerUp;
 
     Vector3 mousePos;
@@ -21,34 +20,55 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
 
     public ParticleSystem explosionChange;
+    public ParticleSystem explosionSpeed;
 
     public PowerupType powerupType;
 
     public GameObject[] Guns;
     public Transform spawnPosGun;
     public bool hasGun;
+
+    private HealthBar playerHealthBar;
+    public float playerHp;
+    public float playerMaxHp;
+
+    public bool gameOver;
+  
+    UiManager uiManager;
+    
     // Start is called before the first frame update
     void Start()
     {
+        gameOver = false;
         ChangeGuns();
         currentSpeed = intialSpeed;
-        isMoving = false;   
         gotHit = false;
         playerRb = GetComponent<Rigidbody>();
         player = GetComponent<Transform>();       
         animator = gameObject.GetComponentInChildren<Animator>();   
+        playerHealthBar = GetComponentInChildren<HealthBar>();  
+        playerHealthBar.SetMaxHealth(playerMaxHp);  
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();    
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {           
-        if (!gotHit)
+        if(playerHp <= 0)
         {
-            animator.Play("WalkFWD");
+            gameOver = true;
+        }      
+        if(!gameOver)
+        {
+            if (!gotHit)
+            {
+                animator.Play("WalkFWD");
+            }
+            MouseLook();
+            ConstraintPlayerMove();
+            MovePlayer();
         }
-        MouseLook();
-        ConstraintPlayerMove();
-        MovePlayer();
+       
        
     }
 
@@ -85,12 +105,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-           // Destroy(other.gameObject);
+            playerHp -=other.GetComponent<Enemy>().meleeDamage;  
+            playerHealthBar.SetHealth(playerHp);
+            StartCoroutine(other.GetComponent<Enemy>().OnDeath());
             StartCoroutine(PlayGetHit());         
             //Debug.Log("-1 health");
         }
@@ -131,12 +152,14 @@ public class PlayerController : MonoBehaviour
  
     IEnumerator SpeedUp()
     {
-        currentSpeed = doubleSpeed;
+        currentSpeed = doubleSpeed;       
+        explosionSpeed.Play();
         yield return new WaitForSeconds(timeForPowerUp);
         currentSpeed = intialSpeed;
     }
     void ChangeGuns()
     {
+        
         for (int i = 0;i  < Guns.Length;i++)
         {
             Guns[i].gameObject.SetActive(false);

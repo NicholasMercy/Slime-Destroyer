@@ -19,19 +19,20 @@ public class Guns : MonoBehaviour
     public Transform BulletSpawn;
     public ParticleSystem gunExplosion;  
     BulletBehaviour bulletBehaviour;
-    
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
         scaleChanger = new Vector3 (scale, scale, scale);
         //transform.Rotate(0, 30f, 0);        
-        bulletBehaviour = bullet.GetComponent<BulletBehaviour>();       
+        bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0) && !isShooting)
+        if(Input.GetMouseButton(0) && !isShooting && !player.gameOver)
         {
             StartCoroutine(Shoot(firerate));                     
         }

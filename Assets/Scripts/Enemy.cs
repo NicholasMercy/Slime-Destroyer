@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,8 +18,17 @@ public class Enemy : MonoBehaviour
     public bool death;
     public ParticleSystem deathParticle;
 
+    private HealthBar healthBar;
 
     public float hp;
+    public float maxHealth;
+    public float damage;
+    public float meleeDamage;
+    public int value;
+
+    PlayerController playerController;
+    UiManager uiManager;
+
     void Start()
     {
         //deathParticle.Stop();
@@ -28,15 +39,20 @@ public class Enemy : MonoBehaviour
         animator = gameObject.GetComponentInChildren<Animator>();
         slimeObj = gameObject.GetComponentInChildren<Transform>();
 
-        
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.SetMaxHealth(maxHealth);
+        hp = maxHealth;
 
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
+        uiManager.UpdateKillCounter(0);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         
-       if(!death)
+       if(!death && !playerController.gameOver)
         {
             MoveToPlayer();
             DestroyEnemy();
@@ -78,10 +94,19 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnDeath());
         }
     }
-    IEnumerator OnDeath()
+    public void TakeDamage(float dmg)
+    {
+        
+        hp -= dmg;
+        //Debug.Log(hp);
+        healthBar.SetHealth(hp);
+        deathParticle.Play();
+    }
+    public IEnumerator OnDeath()
     {
         death = true;       
         animator.Play("Die");
+        uiManager.UpdateKillCounter(value);
         deathParticle.Play();
         yield return new WaitForSeconds(1);
         Destroy(gameObject);    

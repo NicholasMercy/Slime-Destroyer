@@ -9,6 +9,7 @@ TagManager:
   - Gunpickup
   - Bullet
   - Gun
+  - uiManager
   layers:
   - Default
   - TransparentFX
