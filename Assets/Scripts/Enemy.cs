@@ -107,6 +107,7 @@ public class Enemy : MonoBehaviour
         death = true;       
         animator.Play("Die");
         uiManager.UpdateKillCounter(value);
+        healthBar.SetHealth(hp = 0);
         deathParticle.Play();
         yield return new WaitForSeconds(1);
         Destroy(gameObject);    

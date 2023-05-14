@@ -4,65 +4,68 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Speed Variables; 
     public float intialSpeed;
     public float currentSpeed;
     public float doubleSpeed;
+
+    //Range Varaibles;
     private float zBound = 24f;
     private float xBound = 24f;
-    private bool gotHit;   
+    private bool gotHit;
+
+    //Timer Variables;
     public float timeForPowerUp;
 
+    //Mouse and Player
     Vector3 mousePos;
     public Transform player;
     Vector3 objectPos;
     float angle;
-    private Animator animator;
-    private Rigidbody playerRb;
 
+    //animator
+    private Animator animator;
+
+    //Particles
     public ParticleSystem explosionChange;
     public ParticleSystem explosionSpeed;
+    public ParticleSystem bloodSplatter;
 
+    //Types
     public PowerupType currentPowerupType;
     public GunType currentGunType;
 
+    //Guns
     public GameObject[] Guns;
     public Transform spawnPosGun;
     public bool hasGun;
 
+    //Health
     private HealthBar playerHealthBar;
     public float playerHp;
     public float playerMaxHp;
 
+    //States
     public bool gameOver;
-  
+
+    //UI
     UiManager uiManager;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
-        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
-        gameOver = false;
-        ChangeGuns();
-        currentSpeed = intialSpeed;
-        gotHit = false;
-        playerRb = GetComponent<Rigidbody>();
-        player = GetComponent<Transform>();       
-        animator = gameObject.GetComponentInChildren<Animator>();   
-        playerHealthBar = GetComponentInChildren<HealthBar>();  
-        playerHealthBar.SetMaxHealth(playerMaxHp);  
-        
-        
+        BeginGame();
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {           
-        if(playerHp <= 0)
+    {
+        if (playerHp <= 0)
         {
             gameOver = true;
-        }      
-        if(!gameOver)
+        }
+        if (!gameOver)
         {
             if (!gotHit)
             {
@@ -71,21 +74,22 @@ public class PlayerController : MonoBehaviour
             MouseLook();
             ConstraintPlayerMove();
             MovePlayer();
+
         }
-       
-       
+
+
     }
 
     void MovePlayer()
     {
-        
+
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
         Vector3 moveDir = new Vector3(horizontalInput, 0, verticalInput).normalized;
         transform.position += moveDir * currentSpeed * Time.deltaTime;
-     
-        
+
+
 
     }
     void ConstraintPlayerMove()
@@ -113,15 +117,15 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            playerHp -=other.GetComponent<Enemy>().meleeDamage;  
+            playerHp -= other.GetComponent<Enemy>().meleeDamage;
             playerHealthBar.SetHealth(playerHp);
             StartCoroutine(other.GetComponent<Enemy>().OnDeath());
-            StartCoroutine(PlayGetHit());         
+            StartCoroutine(PlayGetHit());
             //Debug.Log("-1 health");
         }
         else if (other.gameObject.CompareTag("Powerup"))
         {
-            if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.SPEEDUP)
+            if (other.gameObject.GetComponent<PowerUp>().type == PowerupType.SPEEDUP)
             {
                 currentPowerupType = PowerupType.SPEEDUP;
                 uiManager.UpdatePowerUpName(currentPowerupType);
@@ -129,46 +133,46 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
 
             }
-            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.GUNPICKUP)
+            else if (other.gameObject.GetComponent<PowerUp>().type == PowerupType.GUNPICKUP)
             {
                 currentPowerupType = PowerupType.GUNPICKUP;
                 uiManager.UpdatePowerUpName(currentPowerupType);
                 ChangeGuns();
                 Destroy(other.gameObject);
-            }                        
+            }
         }
-       
+
     }
 
     void MouseLook()
     {
         mousePos = Input.mousePosition;
-        mousePos.z = 5.23f; 
+        mousePos.z = 5.23f;
         objectPos = Camera.main.WorldToScreenPoint(player.position);
         mousePos.x = mousePos.x - objectPos.x;
         mousePos.y = mousePos.y - objectPos.y;
-        angle = Mathf.Atan2(mousePos.y, mousePos.x)*Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, -angle+90, 0));
+        angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, -angle + 90, 0));
     }
-    IEnumerator PlayGetHit() 
+    IEnumerator PlayGetHit()
     {
         gotHit = true;
         animator.Play("GetHit");
+        bloodSplatter.Play();
         yield return new WaitForSeconds(0.5f);
-        gotHit = false; 
+        gotHit = false;
     }
- 
     IEnumerator SpeedUp()
     {
-        currentSpeed = doubleSpeed;       
+        currentSpeed = doubleSpeed;
         explosionSpeed.Play();
         yield return new WaitForSeconds(timeForPowerUp);
         currentSpeed = intialSpeed;
     }
     void ChangeGuns()
     {
-        
-        for (int i = 0;i  < Guns.Length;i++)
+
+        for (int i = 0; i < Guns.Length; i++)
         {
             Guns[i].gameObject.SetActive(false);
             Guns[i].gameObject.GetComponent<Guns>().isShooting = false;
@@ -179,6 +183,19 @@ public class PlayerController : MonoBehaviour
         currentGunType = Guns[random].GetComponent<Guns>().type;
         uiManager.UpdateGunName(currentGunType);
 
-        
+
+    }
+
+    void BeginGame()
+    {
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
+        gameOver = false;
+        ChangeGuns();
+        currentSpeed = intialSpeed;
+        gotHit = false;
+        player = GetComponent<Transform>();
+        animator = gameObject.GetComponentInChildren<Animator>();
+        playerHealthBar = GetComponentInChildren<HealthBar>();
+        playerHealthBar.SetMaxHealth(playerMaxHp);
     }
 }

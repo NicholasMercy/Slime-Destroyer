@@ -5,12 +5,13 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject[] enemies; 
+    public GameObject[] enemies;
     public GameObject[] powerUps;
 
     int enemyCount;
     int waveCount = 1;
     int EnemySpawnNo = 2;
+    int additionWave = 7;
 
     int zRange = 23;
     int xRange = 23;
@@ -36,21 +37,21 @@ public class SpawnManager : MonoBehaviour
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
         uiManager.UpdateEnemiesCounter(enemyCount);
-        if(enemyCount == 0 && !player.gameOver)
+        if (enemyCount == 0 && !player.gameOver)
         {
             SpawnEnemy();
             SpawnPowerUp();
-            Debug.Log("WAVE "+ (waveCount -1));
-            uiManager.UpdateWaveCounter(waveCount-1);
+            Debug.Log("WAVE " + (waveCount - 1));
+            uiManager.UpdateWaveCounter(waveCount - 1);
         }
-        
+
     }
-    
+
     void SpawnEnemy()
     {
 
-       // Debug.Log(EnemySpawnNo);       
-        EnemySpawnNo = waveCount + 6;
+        // Debug.Log(EnemySpawnNo);       
+        EnemySpawnNo = waveCount + additionWave;
         for (int i = 0; i < EnemySpawnNo; i++)
         {
             //side choice
@@ -60,7 +61,7 @@ public class SpawnManager : MonoBehaviour
             //position random
             int randomX = Random.Range(-xRange, xRange);
             int randomZ = Random.Range(-zRange, zRange);
-            Vector3 randomPos; 
+            Vector3 randomPos;
             //left side
             if (methodChoice == 0)
             {
@@ -68,28 +69,28 @@ public class SpawnManager : MonoBehaviour
                 Instantiate(enemies[randomEnemy], randomPos, Quaternion.identity);
             }
             //right side
-            else if(methodChoice == 1)
+            else if (methodChoice == 1)
             {
 
                 randomPos = new Vector3(xRange, 0, randomZ);
                 Instantiate(enemies[randomEnemy], randomPos, Quaternion.identity);
             }
             //top side
-            else if (methodChoice == 2) 
+            else if (methodChoice == 2)
             {
                 randomPos = new Vector3(randomX, 0, zRange);
                 Instantiate(enemies[randomEnemy], randomPos, Quaternion.identity);
 
             }
             //bottom side
-            else if(methodChoice == 3) 
+            else if (methodChoice == 3)
             {
                 randomPos = new Vector3(randomX, 0, -zRange);
                 Instantiate(enemies[randomEnemy], randomPos, Quaternion.identity);
-            }           
-              
-           
-        }       
+            }
+
+
+        }
         waveCount++;
 
     }
@@ -102,8 +103,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 randomPos = new Vector3(randomXPos, 0.5f, randomzPos);
 
         Instantiate(powerUps[randomPowerUp], randomPos, Quaternion.identity);
-        
+
     }
 
-    
+
 }

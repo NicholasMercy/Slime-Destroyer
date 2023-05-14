@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PowerupType
 {
-    GUNPICKUP, SPEEDUP
+    GUNPICKUP, SPEEDUP, HEALTH, DOUBLEDAMAGE
 }
 public class PowerUp : MonoBehaviour
 {
@@ -14,11 +14,11 @@ public class PowerUp : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        if(!player.gameOver)
+        if (!player.gameOver)
         {
             StartCoroutine(DestroyAfterTime());
 
-        }     
+        }
     }
 
     // Update is called once per frame
