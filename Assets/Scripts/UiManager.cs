@@ -9,6 +9,8 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI killCounter;
     public TextMeshProUGUI enemiesCounter;
     public TextMeshProUGUI waveCounter;
+    public TextMeshProUGUI gunName;
+    public TextMeshProUGUI powerUpActivation;
 
     public int kills;
     public int enemies;
@@ -22,11 +24,22 @@ public class UiManager : MonoBehaviour
     public void UpdateEnemiesCounter(int noEnemies) 
     { 
         enemies = noEnemies;
-        enemiesCounter.text = "Enemies Left: " + enemies;
+        enemiesCounter.text = "Slimes Left: " + enemies;
     }
     public void UpdateWaveCounter(int noWave)
     {
         waves = noWave;
         waveCounter.text = "Wave: " + waves;
+    }
+
+    public void UpdateGunName(GunType GunName)
+    {
+        Debug.Log(gunName.text);    
+        gunName.text =  "Gun: " + GunName.ToString();
+    }
+
+    public void UpdatePowerUpName(PowerupType PowerUp)
+    {
+        powerUpActivation.text = PowerUp.ToString();    
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PowerupType
 {
-    gunpick, speedup
+    GUNPICKUP, SPEEDUP
 }
 public class PowerUp : MonoBehaviour
 {

@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem explosionChange;
     public ParticleSystem explosionSpeed;
 
-    public PowerupType powerupType;
+    public PowerupType currentPowerupType;
+    public GunType currentGunType;
 
     public GameObject[] Guns;
     public Transform spawnPosGun;
@@ -36,9 +37,11 @@ public class PlayerController : MonoBehaviour
   
     UiManager uiManager;
     
+    
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
         gameOver = false;
         ChangeGuns();
         currentSpeed = intialSpeed;
@@ -48,7 +51,8 @@ public class PlayerController : MonoBehaviour
         animator = gameObject.GetComponentInChildren<Animator>();   
         playerHealthBar = GetComponentInChildren<HealthBar>();  
         playerHealthBar.SetMaxHealth(playerMaxHp);  
-        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();    
+        
+        
     }
 
     // Update is called once per frame
@@ -117,14 +121,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Powerup"))
         {
-            if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.speedup)
+            if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.SPEEDUP)
             {
+                currentPowerupType = PowerupType.SPEEDUP;
+                uiManager.UpdatePowerUpName(currentPowerupType);
                 StartCoroutine(SpeedUp());
                 Destroy(other.gameObject);
 
             }
-            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.gunpick)
+            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.GUNPICKUP)
             {
+                currentPowerupType = PowerupType.GUNPICKUP;
+                uiManager.UpdatePowerUpName(currentPowerupType);
                 ChangeGuns();
                 Destroy(other.gameObject);
             }                        
@@ -168,6 +176,8 @@ public class PlayerController : MonoBehaviour
         int random = Random.Range(0, Guns.Length);
         explosionChange.Play();
         Guns[random].SetActive(true);
+        currentGunType = Guns[random].GetComponent<Guns>().type;
+        uiManager.UpdateGunName(currentGunType);
 
         
     }

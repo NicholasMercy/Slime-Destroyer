@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum GunType
 {
-    ak47, ak48, ak49
+    AK47, AK48, AK49
 }
 public class Guns : MonoBehaviour
 {
