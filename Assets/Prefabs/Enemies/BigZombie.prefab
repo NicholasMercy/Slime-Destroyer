@@ -128,6 +128,7 @@ MonoBehaviour:
   damage: 9
   meleeDamage: 18
   value: 4
+  audioSource: {fileID: 0}
 --- !u!54 &4580022541224302106
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -8,10 +8,12 @@ public class BulletBehaviour : MonoBehaviour
     public float speed;
     public float dmg;
     public Vector3 scaleChange;
+    AudioManager audioManager;  
     
     void Start()
     {
         StartCoroutine(DestroyAfterTime()); 
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         //Debug.Log(speed + " " + dmg);
     }
 
@@ -40,6 +42,7 @@ public class BulletBehaviour : MonoBehaviour
         if (other.CompareTag("Enemy") && other.gameObject.GetComponent<Enemy>().death == false) 
         {
             //Debug.Log("hit");
+            audioManager.Play("BulletHit");
             Enemy tempEnemy = other.GetComponent<Enemy>();
             tempEnemy.TakeDamage(dmg);
             

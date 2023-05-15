@@ -11,6 +11,9 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI waveCounter;
     public TextMeshProUGUI gunName;
     public TextMeshProUGUI powerUpActivation;
+    public TextMeshProUGUI yourScoreTxt;
+
+    public GameObject GameOverScreen;
 
     public int kills;
     public int enemies;
@@ -42,4 +45,11 @@ public class UiManager : MonoBehaviour
     {
         powerUpActivation.text = PowerUp.ToString();    
     }
+
+    public void UpdateGameOverScreen()
+    {
+        GameOverScreen.SetActive(true);
+        yourScoreTxt.text = " Score: " + kills;
+    }
+
 }

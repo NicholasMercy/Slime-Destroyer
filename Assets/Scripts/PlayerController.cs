@@ -52,12 +52,14 @@ public class PlayerController : MonoBehaviour
 
     //UI
     UiManager uiManager;
-
+    AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         BeginGame();
+        
+        
     }
 
     // Update is called once per frame
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if (playerHp <= 0)
         {
             gameOver = true;
+            uiManager.UpdateGameOverScreen();   
         }
         if (!gameOver)
         {
@@ -131,6 +134,8 @@ public class PlayerController : MonoBehaviour
             {
                 currentPowerupType = PowerupType.SPEEDUP;
                 uiManager.UpdatePowerUpName(currentPowerupType);
+                audioManager.Play("Pickup");
+                audioManager.Play("SpeedUp");
                 StartCoroutine(SpeedUp());
                 Destroy(other.gameObject);
 
@@ -139,6 +144,8 @@ public class PlayerController : MonoBehaviour
             {
                 currentPowerupType = PowerupType.GUNPICKUP;
                 uiManager.UpdatePowerUpName(currentPowerupType);
+                audioManager.Play("Pickup");
+                audioManager.Play("GunSwitch");
                 ChangeGuns();
                 Destroy(other.gameObject);
             }
@@ -146,7 +153,9 @@ public class PlayerController : MonoBehaviour
             {
                 currentPowerupType = PowerupType.HEALTH;
                 uiManager.UpdatePowerUpName(currentPowerupType);
-                explosionHealth.Play(); 
+                explosionHealth.Play();
+                audioManager.Play("Pickup");
+                audioManager.Play("Heal");
                 if(playerHp < playerMaxHp)
                 {
                     playerHp += 20;
@@ -164,6 +173,8 @@ public class PlayerController : MonoBehaviour
             {
                 currentPowerupType = PowerupType.DOUBLEDAMAGE;
                 uiManager.UpdatePowerUpName(currentPowerupType);
+                audioManager.Play("Pickup");
+                audioManager.Play("DoubleDamage");
                 explosionDoubleDmg.Play();  
                 foreach (GameObject g in Guns)
                 {
@@ -191,6 +202,7 @@ public class PlayerController : MonoBehaviour
     {
         gotHit = true;
         animator.Play("GetHit");
+        audioManager.Play("GetHit");
         bloodSplatter.Play();
         yield return new WaitForSeconds(0.5f);
         gotHit = false;
@@ -202,6 +214,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(timeForPowerUp);
         currentSpeed = intialSpeed;
     }
+    
 
     void ChangeGuns()
     {
@@ -230,5 +243,6 @@ public class PlayerController : MonoBehaviour
         animator = gameObject.GetComponentInChildren<Animator>();
         playerHealthBar = GetComponentInChildren<HealthBar>();
         playerHealthBar.SetMaxHealth(playerMaxHp);
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();    
     }
 }

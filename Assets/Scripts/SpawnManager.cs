@@ -23,34 +23,34 @@ public class SpawnManager : MonoBehaviour
     UiManager uiManager;
     void Start()
     {
-        SpawnEnemy();
-        SpawnPowerUp();
-        InvokeRepeating("SpawnPowerUp", timeSpawn, timeRate);
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
-        uiManager.UpdateWaveCounter(waveCount - 1);
+        StartCoroutine(waitBeginTime());    
         //Debug.Log("WAVE " + (waveCount-1));
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsOfType<Enemy>().Length;
-        uiManager.UpdateEnemiesCounter(enemyCount);
-        if (enemyCount == 0 && !player.gameOver)
+        if(FindObjectsOfType<Enemy>() != null && uiManager != null)
         {
-            SpawnEnemy();
-            SpawnPowerUp();
-            //Debug.Log("WAVE " + (waveCount - 1));
-            uiManager.UpdateWaveCounter(waveCount - 1);
+            enemyCount = FindObjectsOfType<Enemy>().Length;
+            uiManager.UpdateEnemiesCounter(enemyCount);
+            if (enemyCount == 0 && !player.gameOver)
+            {
+                SpawnEnemy();
+                SpawnPowerUp();
+                //Debug.Log("WAVE " + (waveCount - 1));
+                uiManager.UpdateWaveCounter(waveCount - 1);
+            }
         }
+        
 
     }
 
     void SpawnEnemy()
     {
 
-        // Debug.Log(EnemySpawnNo);       
+       // Debug.Log(EnemySpawnNo);
+        additionWave += 2;
         EnemySpawnNo = waveCount + additionWave;
         for (int i = 0; i < EnemySpawnNo; i++)
         {
@@ -103,6 +103,17 @@ public class SpawnManager : MonoBehaviour
         Vector3 randomPos = new Vector3(randomXPos, 0.5f, randomzPos);
 
         Instantiate(powerUps[randomPowerUp], randomPos, Quaternion.identity);
+
+    }
+    IEnumerator waitBeginTime()
+    {
+        yield return new WaitForSeconds(2);
+        SpawnEnemy();
+        SpawnPowerUp();
+        InvokeRepeating("SpawnPowerUp", timeSpawn, timeRate);
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
+        uiManager.UpdateWaveCounter(waveCount - 1);
 
     }
 

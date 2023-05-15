@@ -28,7 +28,9 @@ public class Enemy : MonoBehaviour
 
     PlayerController playerController;
     UiManager uiManager;
-
+    AudioManager audioManager; 
+    
+    public AudioSource audioSource;
     void Start()
     {
         //deathParticle.Stop();
@@ -46,6 +48,10 @@ public class Enemy : MonoBehaviour
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
         uiManager.UpdateKillCounter(0);
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+       // audioSource.Play(); 
+
+        
     }
 
     // Update is called once per frame
@@ -54,6 +60,7 @@ public class Enemy : MonoBehaviour
         
        if(!death && !playerController.gameOver)
         {
+
             MoveToPlayer();
             DestroyEnemy();
         }
@@ -66,6 +73,7 @@ public class Enemy : MonoBehaviour
         if(player != null)
         {
             animator.Play("Taunt");
+            
             Vector3 towardsPlayer = (player.transform.position - transform.position).normalized;
             //rb.AddForce(towardsPlayer*speed*Time.deltaTime,ForceMode.VelocityChange);
             transform.LookAt(player.transform.position);
@@ -109,8 +117,13 @@ public class Enemy : MonoBehaviour
         uiManager.UpdateKillCounter(value);
         healthBar.SetHealth(hp = 0);
         deathParticle.Play();
+        audioManager.Play("DieSlime");
         yield return new WaitForSeconds(1);
-        Destroy(gameObject);    
+        if(gameObject != null)
+        {
+            Destroy(gameObject);
+        }
+       
     }
    
 }

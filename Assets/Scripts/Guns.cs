@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public enum GunType
@@ -50,7 +51,19 @@ public class Guns : MonoBehaviour
     {      
         isShooting = true;
         gunExplosion.Play();
-        audioManager.Play("AK47 Shoot");
+        if(type == GunType.AK47)
+        {
+            audioManager.Play("AK47 Shoot");
+        }
+        else if(type == GunType.AK48)
+        {
+            audioManager.Play("AK48 Shoot");
+        }
+        else if(type == GunType.AK49)
+        {
+            audioManager.Play("AK49 Shoot");
+        }
+        
         Instantiate(bullet, BulletSpawn.position, transform.rotation);
         bulletBehaviour.SetVariables(speed, dmg, scaleChanger);
         yield return new WaitForSeconds(firerate);              
