@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
         uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();
         uiManager.UpdateKillCounter(0);
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        audioManager.Play("SpawnSlimes");
        // audioSource.Play(); 
 
         
