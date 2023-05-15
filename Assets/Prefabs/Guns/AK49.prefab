@@ -131,7 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   speed: 90
+  intialDmg: 2
   dmg: 2
+  dmg2: 4
   firerate: 0.3
   scale: 1.5
   isShooting: 0

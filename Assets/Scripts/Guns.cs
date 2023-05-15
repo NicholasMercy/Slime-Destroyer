@@ -10,8 +10,13 @@ public class Guns : MonoBehaviour
 {
     public GunType type;
     public float speed;
+
+    public float intialDmg;
     public float dmg;
+    public float dmg2;
+
     public float firerate;
+
     public float scale;
     Vector3 scaleChanger;
     public bool isShooting;
@@ -23,6 +28,7 @@ public class Guns : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dmg = intialDmg;    
         scaleChanger = new Vector3 (scale, scale, scale);
         //transform.Rotate(0, 30f, 0);        
         bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
@@ -46,5 +52,15 @@ public class Guns : MonoBehaviour
         yield return new WaitForSeconds(firerate);              
         isShooting=false;
     }
+
+    public IEnumerator DoubleDamage()
+    {
+        dmg = dmg2;
+        yield return new WaitForSeconds(5);
+        dmg = intialDmg;
+    }
+
+
+
     
 }

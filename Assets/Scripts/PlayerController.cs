@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem explosionChange;
     public ParticleSystem explosionSpeed;
     public ParticleSystem bloodSplatter;
+    public ParticleSystem explosionHealth;
+    public ParticleSystem explosionDoubleDmg;
 
     //Types
     public PowerupType currentPowerupType;
@@ -140,6 +142,37 @@ public class PlayerController : MonoBehaviour
                 ChangeGuns();
                 Destroy(other.gameObject);
             }
+            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.HEALTH)
+            {
+                currentPowerupType = PowerupType.HEALTH;
+                uiManager.UpdatePowerUpName(currentPowerupType);
+                explosionHealth.Play(); 
+                if(playerHp < playerMaxHp)
+                {
+                    playerHp += 20;
+                    if(playerHp > playerMaxHp)
+                    {
+                        playerHp = playerMaxHp; 
+                    }
+                    playerHealthBar.SetHealth(playerHp);
+                }
+                Destroy(other.gameObject);
+
+
+            }
+            else if(other.gameObject.GetComponent<PowerUp>().type == PowerupType.DOUBLEDAMAGE) 
+            {
+                currentPowerupType = PowerupType.DOUBLEDAMAGE;
+                uiManager.UpdatePowerUpName(currentPowerupType);
+                explosionDoubleDmg.Play();  
+                foreach (GameObject g in Guns)
+                {
+                   StartCoroutine(g.GetComponent<Guns>().DoubleDamage());   
+                }
+                Destroy(other.gameObject); 
+            
+            
+            }
         }
 
     }
@@ -169,6 +202,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(timeForPowerUp);
         currentSpeed = intialSpeed;
     }
+
     void ChangeGuns()
     {
 
@@ -185,7 +219,6 @@ public class PlayerController : MonoBehaviour
 
 
     }
-
     void BeginGame()
     {
         uiManager = GameObject.FindGameObjectWithTag("uiManager").GetComponent<UiManager>();

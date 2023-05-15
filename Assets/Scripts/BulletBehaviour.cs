@@ -39,7 +39,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && other.gameObject.GetComponent<Enemy>().death == false) 
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             Enemy tempEnemy = other.GetComponent<Enemy>();
             tempEnemy.TakeDamage(dmg);
             
