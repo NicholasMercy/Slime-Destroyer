@@ -25,6 +25,8 @@ public class Guns : MonoBehaviour
     public ParticleSystem gunExplosion;  
     BulletBehaviour bulletBehaviour;
     PlayerController player;
+
+    AudioManager audioManager;  
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class Guns : MonoBehaviour
         //transform.Rotate(0, 30f, 0);        
         bulletBehaviour = bullet.GetComponent<BulletBehaviour>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();    
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class Guns : MonoBehaviour
     {      
         isShooting = true;
         gunExplosion.Play();
+        audioManager.Play("AK47 Shoot");
         Instantiate(bullet, BulletSpawn.position, transform.rotation);
         bulletBehaviour.SetVariables(speed, dmg, scaleChanger);
         yield return new WaitForSeconds(firerate);              

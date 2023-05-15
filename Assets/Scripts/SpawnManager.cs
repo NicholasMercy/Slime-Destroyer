@@ -41,7 +41,7 @@ public class SpawnManager : MonoBehaviour
         {
             SpawnEnemy();
             SpawnPowerUp();
-            Debug.Log("WAVE " + (waveCount - 1));
+            //Debug.Log("WAVE " + (waveCount - 1));
             uiManager.UpdateWaveCounter(waveCount - 1);
         }
 

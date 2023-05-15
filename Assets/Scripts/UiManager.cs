@@ -34,7 +34,7 @@ public class UiManager : MonoBehaviour
 
     public void UpdateGunName(GunType GunName)
     {
-        Debug.Log(gunName.text);    
+        //Debug.Log(gunName.text);    
         gunName.text =  "Gun: " + GunName.ToString();
     }
 

@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private Transform slimeObj;
     private Rigidbody rb;
-    private float speed = 8f;
+    public float speed = 8f;
     private float halfSpeed = 4f;
     private Animator animator;
     public bool death;
@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         death = false;
         player = GameObject.Find("Player");       
         rb = GetComponent<Rigidbody>();
-        speed = Random.Range(3, speed);
+       // speed = Random.Range(3, speed);
         animator = gameObject.GetComponentInChildren<Animator>();
         slimeObj = gameObject.GetComponentInChildren<Transform>();
 
