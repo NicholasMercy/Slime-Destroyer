@@ -103,7 +103,7 @@ public class SpawnManager : MonoBehaviour
         int randomXPos = Random.Range(-xRange, xRange);
 
         int randomPowerUp = Random.Range(0, powerUps.Length);
-        Vector3 randomPos = new Vector3(randomXPos, 0.5f, randomzPos);
+        Vector3 randomPos = new Vector3(randomXPos, 1f, randomzPos);
 
         Instantiate(powerUps[randomPowerUp], randomPos, Quaternion.identity);
 
