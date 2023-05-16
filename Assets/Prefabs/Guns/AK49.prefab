@@ -131,10 +131,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   speed: 90
-  intialDmg: 2
-  dmg: 2
-  dmg2: 4
-  firerate: 0.3
+  intialDmg: 0.8
+  dmg: 0.6
+  dmg2: 1.2
+  firerate: 0.05
   scale: 1.5
   isShooting: 0
   bullet: {fileID: 5749749241619969709, guid: 63e8fe7a515b91848b463037a6c12274, type: 3}

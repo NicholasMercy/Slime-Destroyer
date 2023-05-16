@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
         death = false;
         player = GameObject.Find("Player");       
         rb = GetComponent<Rigidbody>();
-       // speed = Random.Range(3, speed);
+        speed = Random.Range(3, speed);
         animator = gameObject.GetComponentInChildren<Animator>();
         slimeObj = gameObject.GetComponentInChildren<Transform>();
 

@@ -114,7 +114,11 @@ MonoBehaviour:
   player: {fileID: 0}
   explosionChange: {fileID: 1134332502363577761}
   explosionSpeed: {fileID: 2445436485106685064}
-  powerupType: 0
+  bloodSplatter: {fileID: 0}
+  explosionHealth: {fileID: 0}
+  explosionDoubleDmg: {fileID: 0}
+  currentPowerupType: 0
+  currentGunType: 0
   Guns:
   - {fileID: 4012362534920101266}
   - {fileID: 2030739451635610004}
@@ -321,6 +325,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4882590064214274, guid: 3aec22b5d3f3c2947bb81040b56e5f96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137359634230426430, guid: 3aec22b5d3f3c2947bb81040b56e5f96, type: 3}
+      propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

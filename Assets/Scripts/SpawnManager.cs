@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] powerUps;
 
     int enemyCount;
-    int waveCount = 1;
+    public int waveCount = 1;
     int EnemySpawnNo = 2;
     int additionWave = 7;
 
@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
 
     float timeSpawn = 0;
     float timeRate = 5;
+    float speed = 0.5f;
 
     PlayerController player;
     UiManager uiManager;
@@ -36,6 +37,8 @@ public class SpawnManager : MonoBehaviour
             uiManager.UpdateEnemiesCounter(enemyCount);
             if (enemyCount == 0 && !player.gameOver)
             {
+                player.SpeedPerWave(speed);
+
                 SpawnEnemy();
                 SpawnPowerUp();
                 //Debug.Log("WAVE " + (waveCount - 1));

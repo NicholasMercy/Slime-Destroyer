@@ -49,10 +49,12 @@ public class PlayerController : MonoBehaviour
 
     //States
     public bool gameOver;
+    int counter = 0;
 
     //UI
     UiManager uiManager;
     AudioManager audioManager;
+    SpawnManager spawnManager;  
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,16 @@ public class PlayerController : MonoBehaviour
         if (playerHp <= 0)
         {
             gameOver = true;
-            uiManager.UpdateGameOverScreen();   
+            counter++;
+            if(counter ==1)
+            {
+                uiManager.UpdateGameOverScreen();   
+            }
+            else
+            {
+                counter = 3;
+            }
+            
         }
         if (!gameOver)
         {
@@ -82,12 +93,11 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
     }
 
     void MovePlayer()
     {
-
+        
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -209,6 +219,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator SpeedUp()
     {
+       
+       
         currentSpeed = doubleSpeed;
         explosionSpeed.Play();
         yield return new WaitForSeconds(timeForPowerUp);
@@ -243,6 +255,18 @@ public class PlayerController : MonoBehaviour
         animator = gameObject.GetComponentInChildren<Animator>();
         playerHealthBar = GetComponentInChildren<HealthBar>();
         playerHealthBar.SetMaxHealth(playerMaxHp);
-        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();    
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();   
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();    
+    }
+
+    public void SpeedPerWave(float speed)
+    {
+        if(currentSpeed <doubleSpeed - 3)
+        {
+           
+            currentSpeed += speed;
+            intialSpeed = currentSpeed;
+        }
+        
     }
 }
