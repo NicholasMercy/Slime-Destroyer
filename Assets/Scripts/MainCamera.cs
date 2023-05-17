@@ -8,8 +8,9 @@ public class MainCamera : MonoBehaviour
    
     UiManager uiManager;    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        LeanTween.move(gameObject, new Vector3(0, 9.90f, 0), 1.5f).setEaseInCirc();
         //StartCoroutine(KillAnimation());
     }
 

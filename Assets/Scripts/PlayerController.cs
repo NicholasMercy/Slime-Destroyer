@@ -256,7 +256,8 @@ public class PlayerController : MonoBehaviour
         playerHealthBar = GetComponentInChildren<HealthBar>();
         playerHealthBar.SetMaxHealth(playerMaxHp);
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();   
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();    
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        audioManager.Play("BackgroundSong");
     }
 
     public void SpeedPerWave(float speed)
