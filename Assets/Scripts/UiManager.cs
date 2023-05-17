@@ -29,7 +29,7 @@ public class UiManager : MonoBehaviour
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         playFabManager = FindAnyObjectByType<PlayFabManager>();
-        audioManager.Play("SecondBackground");
+       
     }
     public void UpdateKillCounter(int nokills)
     {

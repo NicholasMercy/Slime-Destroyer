@@ -10,7 +10,7 @@ public class MainCamera : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        LeanTween.move(gameObject, new Vector3(0, 9.90f, 0), 1.5f).setEaseInCirc();
+        LeanTween.move(gameObject, new Vector3(0, 9.92f, 0), 1.5f).setEaseInCirc();
         //StartCoroutine(KillAnimation());
     }
 

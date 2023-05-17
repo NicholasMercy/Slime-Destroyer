@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering;
 using TMPro;
-using System;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
@@ -20,6 +17,7 @@ public class PlayFabManager : MonoBehaviour
 
     public GameObject leaderBoard;
     public GameObject titleBoard;
+    public GameObject tutorialBoard;
 
     float transitionTime = 0.1f;
 
@@ -30,16 +28,22 @@ public class PlayFabManager : MonoBehaviour
         login();
         uiManager = FindAnyObjectByType<UiManager>();
         audioManager = FindAnyObjectByType<AudioManager>();
+       
     }
     void Start()
     {
         if(titleBoard != null)
         {
-            StartCoroutine(ShowTitle(0.3f));
+            StartCoroutine(ShowTitle(0.8f));
         }
-        
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            Debug.Log("Working");
+            audioManager.Play("SecondBackground");
+        }
 
-        
+
+
     }
 
     void login()
@@ -179,6 +183,10 @@ public class PlayFabManager : MonoBehaviour
     {
         StartCoroutine(EndGame());  
     }
+    public void ShowTutorialMethod()
+    {
+        StartCoroutine(ShowTutorialBoard());
+    }
      IEnumerator ShowLeaderBoard()
     {
         leaderBoard.SetActive(true);
@@ -193,8 +201,10 @@ public class PlayFabManager : MonoBehaviour
     {
         audioManager.Play("Click");
         LeanTween.scale(leaderBoard, new Vector3(0, 0, 0), time);
+        LeanTween.scale(tutorialBoard, new Vector3(0, 0, 0), time);
         yield return new WaitForSeconds(transitionTime);
         LeanTween.scale(titleBoard, new Vector3(1, 1, 1), time);
+        tutorialBoard.SetActive(false);
         titleBoard.SetActive(true);
         leaderBoard.SetActive(false);
     }
@@ -212,4 +222,14 @@ public class PlayFabManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         Application.Quit(); 
     }
+
+    IEnumerator ShowTutorialBoard()
+    {
+        tutorialBoard.SetActive(true);
+        audioManager.Play("Click");
+        LeanTween.scale(titleBoard, new Vector3(0, 0, 0), transitionTime);     
+        yield return new WaitForSeconds(transitionTime);
+        LeanTween.scale(tutorialBoard, new Vector3(1, 1, 1), transitionTime);
+    }
+
 }

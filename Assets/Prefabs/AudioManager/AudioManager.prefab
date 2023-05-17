@@ -147,3 +147,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: SecondBackground
+    clip: {fileID: 8300000, guid: 885e4f8d5102f1a499310a679fb1f121, type: 3}
+    volume: 0.554
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
